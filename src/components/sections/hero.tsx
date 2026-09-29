@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { HeroContent } from "@/components/ui/hero-content";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 
@@ -72,25 +73,30 @@ export function Hero({
   collage = "collage-cyan",
   rayColor = "malibu",
   className,
+  animate = true,
   children,
 }: {
   collage?: Collage;
   rayColor?: RayColor;
   className?: string;
+  /** Set false when the children animate themselves (e.g. the home hero). */
+  animate?: boolean;
   children: React.ReactNode;
 }) {
+  const layout = cn(
+    "flex flex-col items-center gap-5 text-center md:gap-6",
+    className,
+  );
+
   return (
     <div className="relative isolate">
       <HeroBackdrop collage={collage} rayColor={rayColor} />
-      <Section
-        width="md"
-        spacing="sm"
-        className={cn(
-          "relative z-0 flex flex-col items-center gap-5 text-center md:gap-6",
-          className,
+      <Section width="md" spacing="sm" className="relative z-0">
+        {animate ? (
+          <HeroContent className={layout}>{children}</HeroContent>
+        ) : (
+          <div className={layout}>{children}</div>
         )}
-      >
-        {children}
       </Section>
     </div>
   );

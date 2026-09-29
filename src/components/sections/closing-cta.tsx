@@ -32,7 +32,7 @@ export function ClosingCta({
 }) {
   return (
     <div className="reveal">
-      <Section>
+      <Section spacing="md">
         <div className="grid gap-0 overflow-hidden rounded-3xl border border-border bg-muted md:grid-cols-2">
           <div className="flex flex-col items-start gap-6 p-8 md:p-12 lg:p-16">
             <Heading

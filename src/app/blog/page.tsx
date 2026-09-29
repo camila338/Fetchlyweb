@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/hero";
 import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
+import { Stagger, StaggerItem } from "@/components/ui/stagger";
 import { formatDate } from "@/content/case-studies";
 import { POSTS } from "@/content/posts";
 
@@ -37,38 +38,36 @@ export default function BlogPage() {
         </div>
       </Hero>
 
-      <div className="reveal">
-        <Section>
-          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {POSTS.map((post) => (
-              <li key={post.slug}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group flex h-full flex-col gap-4 rounded-3xl border border-border bg-card p-4 transition-colors hover:border-foreground"
-                >
-                  <Image
-                    src={post.cover.src}
-                    alt=""
-                    width={post.cover.width}
-                    height={post.cover.height}
-                    className="aspect-[3/2] w-full rounded-2xl object-cover"
-                  />
-                  <h2 className="font-display text-h5 text-balance text-foreground">
-                    {post.title}
-                  </h2>
-                  <p className="text-body-sm text-pretty text-muted-foreground">
-                    {post.lead}
-                  </p>
-                  <p className="mt-auto text-body-xs text-muted-foreground">
-                    {post.author} ·{" "}
-                    <time dateTime={post.date}>{formatDate(post.date)}</time>
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      </div>
+      <Section>
+        <Stagger as="ul" className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {POSTS.map((post) => (
+            <StaggerItem as="li" key={post.slug}>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group flex h-full flex-col gap-4 rounded-3xl border border-border bg-card p-4 transition-colors hover:border-foreground"
+              >
+                <Image
+                  src={post.cover.src}
+                  alt=""
+                  width={post.cover.width}
+                  height={post.cover.height}
+                  className="aspect-[3/2] w-full rounded-2xl object-cover"
+                />
+                <h2 className="font-display text-h5 text-balance text-foreground">
+                  {post.title}
+                </h2>
+                <p className="text-body-sm text-pretty text-muted-foreground">
+                  {post.lead}
+                </p>
+                <p className="mt-auto text-body-xs text-muted-foreground">
+                  {post.author} ·{" "}
+                  <time dateTime={post.date}>{formatDate(post.date)}</time>
+                </p>
+              </Link>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Section>
 
       <ClosingCta />
     </main>

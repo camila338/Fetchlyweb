@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { LogoMarquee } from "@/components/sections/logo-marquee";
+import { RevealZoom } from "@/components/sections/reveal-zoom";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 import { Stars } from "@/components/ui/stars";
@@ -94,9 +95,9 @@ const VIDEO_CELLS: VideoCell[] = [
   },
 ];
 
-function VideoTile({ cell }: { cell: VideoCell }) {
+function VideoTile({ cell, index }: { cell: VideoCell; index: number }) {
   return (
-    <figure className={`${CELL} ${cell.span}`}>
+    <RevealZoom as="figure" index={index} className={`${CELL} ${cell.span}`}>
       <video
         src={`/videos/home/${cell.slug}.mp4`}
         poster={cell.poster}
@@ -134,7 +135,7 @@ function VideoTile({ cell }: { cell: VideoCell }) {
           className="max-h-11 w-auto max-w-44 object-contain lg:max-h-9 lg:max-w-32"
         />
       </figcaption>
-    </figure>
+    </RevealZoom>
   );
 }
 
@@ -150,13 +151,14 @@ export function Bento({
   const [oats, spyderco, casper, winc, vast] = VIDEO_CELLS;
 
   return (
-    <div className="reveal">
+    <div>
       <Section spacing="md" className="pb-6 md:pb-10">
         <div className="grid auto-rows-[16rem] gap-4 md:auto-rows-[5.5rem] md:grid-cols-2 lg:h-[52rem] lg:auto-rows-auto lg:grid-cols-4 lg:grid-rows-[minmax(0,29fr)_minmax(0,6fr)_minmax(0,29fr)]">
-          <VideoTile cell={oats} />
-          <VideoTile cell={spyderco} />
+          <VideoTile cell={oats} index={0} />
+          <VideoTile cell={spyderco} index={1} />
 
-          <div
+          <RevealZoom
+            index={2}
             className={`${CELL} flex flex-col justify-start p-5 sm:p-6 md:row-span-3 lg:row-auto lg:row-start-1 lg:row-end-2`}
           >
             <Heading
@@ -172,12 +174,14 @@ export function Bento({
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
               className="pointer-events-none absolute inset-x-0 bottom-0 max-h-[40%] w-full object-cover object-bottom opacity-90 md:object-contain"
             />
-          </div>
+          </RevealZoom>
 
-          <VideoTile cell={casper} />
-          <VideoTile cell={winc} />
+          <VideoTile cell={casper} index={3} />
+          <VideoTile cell={winc} index={0} />
 
-          <figure
+          <RevealZoom
+            as="figure"
+            index={1}
             className={`${CELL} flex flex-col justify-between gap-4 p-6 sm:p-8 md:row-span-3 lg:row-auto lg:row-start-3 lg:row-end-4`}
           >
             <span
@@ -221,11 +225,13 @@ export function Bento({
                 Senior Digital Product Manager, GNC
               </span>
             </figcaption>
-          </figure>
+          </RevealZoom>
 
-          <VideoTile cell={vast} />
+          <VideoTile cell={vast} index={2} />
 
-          <figure
+          <RevealZoom
+            as="figure"
+            index={3}
             className={`${CELL} md:row-span-3 lg:row-auto lg:row-start-3 lg:row-end-4`}
           >
             <Image
@@ -236,11 +242,13 @@ export function Bento({
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
               className="h-full w-full object-cover"
             />
-          </figure>
+          </RevealZoom>
         </div>
       </Section>
 
-      <LogoMarquee title="Trusted by brands you know" logos={logos} />
+      <div className="reveal">
+        <LogoMarquee title="Trusted by brands you know" logos={logos} />
+      </div>
     </div>
   );
 }

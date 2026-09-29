@@ -18,8 +18,8 @@ export function TestimonialMarquee({ full = false }: { full?: boolean } = {}) {
   return (
     <div className="bg-[radial-gradient(ellipse_80%_60%_at_20%_0%,var(--color-malibu-lighter),transparent_70%),radial-gradient(ellipse_70%_70%_at_85%_100%,var(--color-spring-green-lightest),transparent_72%),linear-gradient(var(--color-malibu-lightest),var(--color-malibu-lightest))]">
       <div className="reveal">
-        <div className="overflow-hidden py-16 md:py-20 xl:py-section-lg">
-          <Section spacing="sm" className="py-0 md:py-12 xl:py-section-sm">
+        <div className="overflow-hidden py-14 md:py-16">
+          <Section spacing="none">
             <Heading
               lines={["What it is like to work with us"]}
               className="text-h2 text-foreground"

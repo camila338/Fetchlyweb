@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/hero";
 import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
+import { Stagger, StaggerItem } from "@/components/ui/stagger";
 import { CASE_STUDIES, formatDate } from "@/content/case-studies";
 
 export const metadata: Metadata = {
@@ -36,15 +37,14 @@ export default function WorkPage() {
         </div>
       </Hero>
 
-      <div className="reveal">
-        <Section>
-          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {CASE_STUDIES.map((study) => (
-              <li key={study.slug}>
-                <Link
-                  href={`/work/${study.slug}`}
-                  className="group flex h-full flex-col gap-4 rounded-3xl border border-border bg-card p-4 transition-colors hover:border-foreground"
-                >
+      <Section>
+        <Stagger as="ul" className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {CASE_STUDIES.map((study) => (
+            <StaggerItem as="li" key={study.slug}>
+              <Link
+                href={`/work/${study.slug}`}
+                className="group flex h-full flex-col gap-4 rounded-3xl border border-border bg-card p-4 transition-colors hover:border-foreground"
+              >
                   <Image
                     src={study.cover.src}
                     alt=""
@@ -58,16 +58,15 @@ export default function WorkPage() {
                   <p className="text-body-sm text-pretty text-muted-foreground">
                     {study.excerpt}
                   </p>
-                  <p className="mt-auto text-body-xs text-muted-foreground">
-                    Fetchly ·{" "}
-                    <time dateTime={study.date}>{formatDate(study.date)}</time>
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      </div>
+                <p className="mt-auto text-body-xs text-muted-foreground">
+                  Fetchly ·{" "}
+                  <time dateTime={study.date}>{formatDate(study.date)}</time>
+                </p>
+              </Link>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Section>
 
       <ClosingCta />
     </main>

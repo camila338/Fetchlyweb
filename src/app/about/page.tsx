@@ -27,6 +27,7 @@ import { Heading } from "@/components/ui/heading";
 import { IconBadge, IconCard } from "@/components/ui/icon-card";
 import { RingWordmark } from "@/components/ui/ring-wordmark";
 import { Section } from "@/components/ui/section";
+import { Stagger, StaggerItem } from "@/components/ui/stagger";
 import {
   ABOUT_STATS,
   ALTERNATIVES,
@@ -87,7 +88,7 @@ export default function AboutPage() {
       </InkSection>
 
       <div className="bg-muted">
-        <div className="reveal">
+        <div className="reveal-left">
           <Section className="flex flex-col gap-12 lg:gap-16">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
               <div className="relative isolate aspect-square rounded-3xl bg-neutral-lighter [mask-image:radial-gradient(white,white)] [mask-size:100%_100%]">
@@ -167,29 +168,30 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="reveal">
-        <Section className="flex flex-col items-center gap-10 lg:gap-16">
-          <div className="flex max-w-site-md flex-col items-center gap-6 text-center">
-            <Heading
-              lines={["Everything you need. Nothing you don't."]}
-              className="text-h2 text-balance text-foreground"
-            />
-          </div>
-          <ul className="grid w-full auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {CAPABILITIES.map((item) => (
-              <li key={item.title} className="flex">
-                <IconCard
-                  icon={ICONS[item.icon]}
-                  tint={item.tint}
-                  title={item.title}
-                >
-                  {item.body}
-                </IconCard>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      </div>
+      <Section className="flex flex-col items-center gap-10 lg:gap-16">
+        <div className="reveal-right flex max-w-site-md flex-col items-center gap-6 text-center">
+          <Heading
+            lines={["Everything you need. Nothing you don't."]}
+            className="text-h2 text-balance text-foreground"
+          />
+        </div>
+        <Stagger
+          as="ul"
+          className="grid w-full auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        >
+          {CAPABILITIES.map((item) => (
+            <StaggerItem as="li" key={item.title} className="flex">
+              <IconCard
+                icon={ICONS[item.icon]}
+                tint={item.tint}
+                title={item.title}
+              >
+                {item.body}
+              </IconCard>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Section>
 
       <ClosingCta cta="Book a free strategy call" />
     </main>

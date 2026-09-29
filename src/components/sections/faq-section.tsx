@@ -22,7 +22,7 @@ export function FaqSection({
   faqs: readonly Faq[];
 }) {
   return (
-    <div className="reveal">
+    <div className="reveal-right">
       <Section className="grid gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16">
         <div className="flex flex-col gap-8">
           <Heading lines={[title]} className="text-h2 text-foreground" />

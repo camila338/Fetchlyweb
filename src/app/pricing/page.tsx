@@ -47,7 +47,7 @@ export default function PricingPage() {
         <LogoMarquee title="Trusted by brands you know" logos={TRUSTED_LOGOS} />
       </div>
 
-      <div className="reveal">
+      <div className="reveal-left">
         <div id="plans" className="scroll-mt-24">
           <Section className="flex flex-col gap-10">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">

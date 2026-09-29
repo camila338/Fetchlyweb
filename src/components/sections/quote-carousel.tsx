@@ -32,7 +32,7 @@ export function QuoteCarousel({
     setIndex((current) => (current + step + quotes.length) % quotes.length);
 
   return (
-    <Section className="flex flex-col gap-10">
+    <Section spacing="md" className="flex flex-col gap-8">
       <h2 className="sr-only">{heading}</h2>
 
       <p className="flex items-center gap-3">

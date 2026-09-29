@@ -81,7 +81,7 @@ export default function DesignOpsPage() {
         asideCta="Schedule a strategy call"
       />
 
-      <div className="reveal">
+      <div className="reveal-left">
         <Section className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16">
           <div className="flex flex-col gap-8">
             <h2 className="text-h2 text-balance text-foreground">
@@ -143,7 +143,7 @@ export default function DesignOpsPage() {
         </Section>
       </div>
 
-      <div className="reveal">
+      <div className="reveal-right">
         <div className="scroll-mt-24" id="pricing">
           <Section className="flex flex-col gap-10">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">

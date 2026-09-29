@@ -1,6 +1,7 @@
 import { CheckIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 
+import { CountUp } from "@/components/ui/count-up";
 import { Marquee } from "@/components/ui/marquee";
 import { ABOUT_STATS } from "@/content/about";
 import { TESTIMONIALS } from "@/content/testimonials";
@@ -110,7 +111,7 @@ export function ContactAside() {
         {ABOUT_STATS.map((stat) => (
           <div key={stat.label} className="flex flex-col gap-1">
             <dd className="order-1 font-display text-h4 text-foreground">
-              {stat.value}
+              <CountUp value={stat.value} />
             </dd>
             <dt className="order-2 text-body-sm text-pretty text-muted-foreground">
               {stat.label}

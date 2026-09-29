@@ -9,17 +9,14 @@ type Logo = { name: string; src: string; square?: boolean };
 /** Centred eyebrow heading over a slow, full-bleed logo marquee. */
 export function LogoMarquee({ title, logos }: { title: string; logos: readonly Logo[] }) {
   return (
-    <div className="overflow-hidden">
-      <Section
-        spacing="sm"
-        className="py-0 pt-8 md:py-12 md:pt-10 xl:py-section-sm"
-      >
+    <div className="overflow-hidden py-10 md:py-14">
+      <Section spacing="none">
         <Heading
           lines={[title]}
           className="text-center text-h6 text-balance text-muted-foreground"
         />
       </Section>
-      <div className="py-5 [--duration:44s] [--gap:3.5rem] md:py-7">
+      <div className="mt-6 [--duration:44s] [--gap:3.5rem] md:mt-8">
         <Marquee>
           {logos.map((logo) => (
             <div

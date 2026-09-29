@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ArticleBody } from "@/components/article";
+import { CountUp } from "@/components/ui/count-up";
 import { Section } from "@/components/ui/section";
 import { CASE_STUDIES, formatDate, getCaseStudy } from "@/content/case-studies";
 import { CASE_STUDY_BODIES } from "@/content/case-study-bodies";
@@ -67,7 +68,7 @@ export default async function CaseStudyPage({ params }: Params) {
             {body.stats.map((stat) => (
               <div key={stat.label} className="flex flex-col gap-1.5">
                 <dd className="font-display text-h4 text-(--accent-figure)">
-                  <span>{stat.value}</span>
+                  <CountUp value={stat.value} />
                 </dd>
                 <dt className="text-body-sm text-pretty text-muted-foreground">
                   {stat.label}

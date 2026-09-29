@@ -7,15 +7,18 @@ import { Bento } from "@/components/sections/bento";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { FaqSection } from "@/components/sections/faq-section";
 import { Hero } from "@/components/sections/hero";
+import { HeroHeading } from "@/components/sections/hero-heading";
+import { HeroRating } from "@/components/sections/hero-rating";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { SprintSection } from "@/components/sections/sprint-section";
 import { ActionLink } from "@/components/ui/action-link";
 import { StatBand } from "@/components/sections/stat-band";
 import { TestimonialMarquee } from "@/components/sections/testimonial-marquee";
-import { buttonVariants } from "@/components/ui/button";
+import { FadeIn } from "@/components/ui/fade-in";
+import { GlowButton } from "@/components/ui/glow-button";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
-import { StarIcons } from "@/components/ui/stars";
+import { Stagger, StaggerItem } from "@/components/ui/stagger";
 import { CASE_STUDIES } from "@/content/case-studies";
 import { HOME_FAQS } from "@/content/faqs";
 import { TECH_STACK, TRUSTED_LOGOS } from "@/content/stack";
@@ -48,72 +51,60 @@ const PROCESS = [
 export default function HomePage() {
   return (
     <main id="main" tabIndex={-1} className="outline-none">
-      <Hero>
-        <p className="inline-flex items-center gap-3 rounded-full border border-border bg-background py-1.5 pr-4 pl-1.5 text-body-sm shadow-sm">
-          <Image
-            src="/images/decor/hero-avatars.webp"
-            alt="Avatars of Fetchly clients"
-            width={366}
-            height={128}
-            sizes="72px"
-            className="h-7 w-auto"
-          />
-          <span className="font-semibold">5.0</span>
-          <StarIcons />
-          <span className="sr-only">out of 5</span>
-          <span className="text-muted-foreground">Clutch</span>
-        </p>
+      <Hero animate={false}>
+        <HeroRating label="Clutch" />
 
-        <Heading
-          as="h1"
+        <HeroHeading
           italicFirst
           lines={["The team behind", "best-selling brands"]}
           className="text-display-1 text-balance text-foreground"
         />
 
-        <p className="max-w-site-sm text-body-lg text-pretty text-muted-foreground">
-          A full product team — engineering, design, QA and project management —
-          on one flat monthly plan. No scope of work, no hiring cycle, and it
-          flexes as your roadmap does.
-        </p>
+        <FadeIn delay={0.55} className="max-w-site-sm">
+          <p className="text-body-lg text-pretty text-muted-foreground">
+            A full product team — engineering, design, QA and project management
+            — on one flat monthly plan. No scope of work, no hiring cycle, and it
+            flexes as your roadmap does.
+          </p>
+        </FadeIn>
 
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <Link href="/work" className={buttonVariants()}>
-            See what we built
-          </Link>
-          <ActionLink href="/contact">Talk to Sales</ActionLink>
-        </div>
+        <FadeIn delay={0.75}>
+          <div className="flex flex-col items-center gap-4 sm:flex-row">
+            <GlowButton href="/work">See what we built</GlowButton>
+            <ActionLink href="/contact">Talk to Sales</ActionLink>
+          </div>
+        </FadeIn>
       </Hero>
 
       <Bento logos={TRUSTED_LOGOS} />
 
       <InkSection>
         <StatBand
-          lines={["10.7% more conversion. 40% longer subscriptions."]}
+          fill
+          lines={["10.7% more conversion.", "40% longer subscriptions."]}
           intro="Every figure below is from a case study on this site, not a rounded-up claim."
           stats={STATS}
         />
       </InkSection>
 
       <div className="bg-muted">
-        <div className="reveal">
-          <Section className="flex flex-col gap-8 lg:gap-12">
-            <div className="flex flex-col gap-4">
-              <Heading
-                lines={["The work behind those numbers"]}
-                className="text-h2 text-foreground"
-              />
-              <p className="max-w-site-sm text-body-lg text-pretty text-muted-foreground">
-                Six engagements, and what changed for each.
-              </p>
-            </div>
-            <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {CASE_STUDIES.map((study) => (
-                <li key={study.slug}>
-                  <Link
-                    href={`/work/${study.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-colors hover:border-foreground"
-                  >
+        <Section className="flex flex-col gap-8 lg:gap-12">
+          <div className="reveal-left flex flex-col gap-4">
+            <Heading
+              lines={["The work behind those numbers"]}
+              className="text-h2 text-foreground"
+            />
+            <p className="max-w-site-sm text-body-lg text-pretty text-muted-foreground">
+              Six engagements, and what changed for each.
+            </p>
+          </div>
+          <Stagger as="ul" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {CASE_STUDIES.map((study) => (
+              <StaggerItem as="li" key={study.slug}>
+                <Link
+                  href={`/work/${study.slug}`}
+                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-colors hover:border-foreground"
+                >
                     <Image
                       src={study.thumb.src}
                       alt=""
@@ -138,12 +129,11 @@ export default function HomePage() {
                         {study.summary}
                       </p>
                     </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Section>
-        </div>
+                </Link>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Section>
       </div>
 
       <div className="reveal">

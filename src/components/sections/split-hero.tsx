@@ -10,6 +10,7 @@ import {
 import { ActionLink } from "@/components/ui/action-link";
 import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
+import { HeroContent } from "@/components/ui/hero-content";
 import { Marquee } from "@/components/ui/marquee";
 import { Section } from "@/components/ui/section";
 import { StarIcons } from "@/components/ui/stars";
@@ -56,7 +57,7 @@ export function SplitHero({
         spacing="sm"
         className="relative z-0 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14"
       >
-        <div className="flex flex-col items-start gap-5 text-left md:gap-6">
+        <HeroContent className="flex flex-col items-start gap-5 text-left md:gap-6">
           <p className="inline-flex items-center gap-3 rounded-full border border-border bg-background py-1.5 pr-4 pl-1.5 text-body-sm shadow-sm">
             <Image
               src="/images/decor/hero-avatars.webp"
@@ -104,7 +105,7 @@ export function SplitHero({
               ),
             )}
           </div>
-        </div>
+        </HeroContent>
 
         <div className="grid w-full grid-cols-2 gap-3 lg:gap-4">
           {tiles.map((tile) => (
