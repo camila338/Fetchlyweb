@@ -1,4 +1,4 @@
-import { CheckIcon } from "lucide-react";
+import { CircleCheckIcon } from "lucide-react";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -30,12 +30,18 @@ export function PlanCard({
   return (
     <li
       className={cn(
-        "flex flex-col gap-6 rounded-3xl border p-6 md:p-8",
+        "relative flex flex-col gap-6 rounded-3xl border p-6 md:p-8",
         featured
-          ? "border-transparent bg-malibu-darkest text-neutral-lightest"
+          ? "z-10 border-transparent bg-malibu-darkest text-neutral-lightest shadow-2xl shadow-malibu-darkest/30 ring-1 ring-malibu/40 lg:-translate-y-4"
           : "border-border bg-card",
       )}
     >
+      {featured ? (
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-malibu px-4 py-1 font-mono text-body-xs whitespace-nowrap text-malibu-darkest uppercase shadow-md">
+          Recommended
+        </span>
+      ) : null}
+
       <div className="flex flex-col gap-3">
         <h3
           className={cn(
@@ -92,11 +98,11 @@ export function PlanCard({
         <ul className="flex flex-col gap-2">
           {features.map((feature) => (
             <li key={feature} className="flex items-start gap-2 text-body-sm">
-              <CheckIcon
+              <CircleCheckIcon
                 aria-hidden
                 className={cn(
-                  "mt-0.5 size-4 shrink-0",
-                  featured ? "text-malibu" : "text-malibu-darker",
+                  "mt-0.5 size-[1.15rem] shrink-0",
+                  featured ? "text-malibu" : "text-spring-green-darker",
                 )}
               />
               <span className={featured ? undefined : "text-muted-foreground"}>
@@ -110,8 +116,8 @@ export function PlanCard({
       <Link
         href={href}
         className={cn(
-          buttonVariants({ variant: featured ? "secondary" : "primary", size: "sm" }),
-          "mt-auto self-start",
+          buttonVariants({ variant: featured ? "secondary" : "primary" }),
+          "mt-auto w-full",
         )}
       >
         {cta}
