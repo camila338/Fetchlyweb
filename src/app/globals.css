@@ -1,0 +1,427 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ---------------------------------------------------------------------------
+   Fetchly design system
+   Brand scales, fluid type ramp, layout rhythm and radii.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-marjorie), Georgia, serif;
+
+  --color-malibu-darkest: #1f444b;
+  --color-malibu-darker: #2a5b64;
+  --color-malibu-dark: #54b7c8;
+  --color-malibu: #69e5fb;
+  --color-malibu-light: #96ecfc;
+  --color-malibu-lighter: #e1f9fe;
+  --color-malibu-lightest: #f0fcfe;
+
+  --color-spring-green-darker: #016643;
+  --color-spring-green-dark: #03cc86;
+  --color-spring-green: #04ffa8;
+  --color-spring-green-light: #4fffc2;
+  --color-spring-green-lighter: #ccffed;
+  --color-spring-green-lightest: #e5fff6;
+
+  --color-star: #d97706;
+
+  --color-neutral-darkest: #050b0d;
+  --color-neutral-darker: #1e2325;
+  --color-neutral-dark: #505455;
+  --color-neutral: #e5e4df;
+  --color-neutral-light: #f5f3ef;
+  --color-neutral-lighter: #f6f5f1;
+  --color-neutral-lightest: #fffefa;
+
+  --color-info-dark: #0062cc;
+  --color-info: #007bff;
+  --color-danger-dark: #b54848;
+  --color-danger: #e35a5a;
+  --color-danger-light: #eb8b8b;
+
+  --text-display-1: clamp(3.5rem, 2.8785rem + 2.6519vw, 5rem);
+  --text-display-1--line-height: 1.1;
+  --text-display-1--font-weight: 400;
+  --text-display-1--letter-spacing: clamp(-1.12px, -1.1697px + 0.0133vw, -1px);
+  --text-display-2: clamp(3rem, 2.5856rem + 1.768vw, 4rem);
+  --text-display-2--line-height: 1.15;
+  --text-display-2--font-weight: 400;
+  --text-display-2--letter-spacing: clamp(-1px, -0.9434px + -0.0044vw, -0.96px);
+  --text-h1: clamp(2.5rem, 2.0856rem + 1.768vw, 3.5rem);
+  --text-h1--line-height: 1.2;
+  --text-h1--font-weight: 400;
+  --text-h1--letter-spacing: clamp(-1px, -0.7171px + -0.0221vw, -0.8px);
+  --text-h2: clamp(2.25rem, 1.9392rem + 1.326vw, 3rem);
+  --text-h2--line-height: 1.2;
+  --text-h2--font-weight: 400;
+  --text-h2--letter-spacing: clamp(-1px, -0.3494px + -0.0508vw, -0.54px);
+  --text-h3: clamp(2rem, 1.7928rem + 0.884vw, 2.5rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--font-weight: 400;
+  --text-h3--letter-spacing: clamp(-1px, -0.2645px + -0.0575vw, -0.48px);
+  --text-h4: clamp(1.5rem, 1.2928rem + 0.884vw, 2rem);
+  --text-h4--line-height: 1.3;
+  --text-h4--font-weight: 500;
+  --text-h4--letter-spacing: clamp(-0.8px, -0.1777px + -0.0486vw, -0.36px);
+  --text-h5: clamp(1.25rem, 1.1464rem + 0.442vw, 1.5rem);
+  --text-h5--line-height: 1.4;
+  --text-h5--font-weight: 500;
+  --text-h5--letter-spacing: clamp(-0.8px, -0.0928px + -0.0552vw, -0.3px);
+  --text-h6: clamp(1.125rem, 1.0732rem + 0.221vw, 1.25rem);
+  --text-h6--line-height: 1.4;
+  --text-h6--font-weight: 500;
+  --text-h6--letter-spacing: clamp(-0.8px, -0.0504px + -0.0586vw, -0.27px);
+
+  --text-body-lg: 1.25rem;
+  --text-body-lg--line-height: 1.5;
+  --text-body-lg--font-weight: 400;
+  --text-body-lg--letter-spacing: -0.01em;
+  --text-body-md: 1.125rem;
+  --text-body-md--line-height: 1.5;
+  --text-body-md--font-weight: 500;
+  --text-body-md--letter-spacing: -0.01em;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5;
+  --text-body--font-weight: 500;
+  --text-body--letter-spacing: -0.01em;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+  --text-body-sm--font-weight: 500;
+  --text-body-sm--letter-spacing: 0em;
+  --text-body-xs: 0.75rem;
+  --text-body-xs--line-height: 1.5;
+  --text-body-xs--font-weight: 500;
+  --text-body-xs--letter-spacing: 0em;
+  --text-tagline: 1rem;
+  --text-tagline--line-height: 1;
+  --text-tagline--font-weight: 400;
+  --text-tagline--letter-spacing: -0.015em;
+
+  --spacing-page: 4rem;
+  --spacing-section-sm: 3rem;
+  --spacing-section-md: 5rem;
+  --spacing-section-lg: 7rem;
+
+  --container-site-sm: 48rem;
+  --container-site-md: 64rem;
+  --container-site-lg: 80rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.5rem;
+  --radius-4xl: 3rem;
+
+  --animate-marquee: marquee var(--duration, 40s) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 40s) infinite linear;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap, 1rem)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap, 1rem)));
+    }
+  }
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--accordion-panel-height, auto);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--accordion-panel-height, auto);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes ink-drift {
+    from {
+      background-position: 0% 0%, 100% 100%;
+    }
+    to {
+      background-position: 18% 12%, 82% 88%;
+    }
+  }
+  @keyframes ray-drift {
+    0%,
+    100% {
+      transform: translateX(-50%) rotate(var(--ray-rotate, 0deg));
+      opacity: 0.42;
+    }
+    50% {
+      transform: translateX(-50%) rotate(calc(var(--ray-rotate, 0deg) + 7deg));
+      opacity: 0.62;
+    }
+  }
+  @keyframes plate-drift {
+    0%,
+    100% {
+      background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+    50% {
+      background-position: 0% 0%, -2% 1.8%, 1.5% 1%, -1.8% -1.2%;
+    }
+  }
+  @keyframes reveal-in {
+    from {
+      transform: translateY(1.5rem);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes ring-spin {
+    from {
+      transform: rotate(-20deg);
+    }
+    to {
+      transform: rotate(100deg);
+    }
+  }
+}
+
+/* shadcn semantic layer -------------------------------------------------- */
+:root {
+  --radius: var(--radius-md);
+  --background: var(--color-neutral-lightest);
+  --foreground: var(--color-neutral-darkest);
+  --card: var(--color-neutral-lightest);
+  --card-foreground: var(--color-neutral-darkest);
+  --popover: var(--color-neutral-lightest);
+  --popover-foreground: var(--color-neutral-darkest);
+  --primary: var(--color-malibu);
+  --primary-foreground: var(--color-malibu-darkest);
+  --secondary: var(--color-neutral-light);
+  --secondary-foreground: var(--color-neutral-darkest);
+  --muted: var(--color-neutral-lighter);
+  --muted-foreground: var(--color-neutral-dark);
+  --accent: var(--color-malibu-lightest);
+  --accent-foreground: var(--color-malibu-darkest);
+  --destructive: var(--color-danger-dark);
+  --destructive-foreground: var(--color-neutral-lightest);
+  --border: var(--color-neutral);
+  --input: var(--color-neutral);
+  --ring: var(--color-malibu-darker);
+  --chart-1: var(--color-malibu);
+  --chart-2: var(--color-spring-green);
+  --chart-3: var(--color-info);
+  --chart-4: var(--color-malibu-dark);
+  --chart-5: var(--color-neutral-dark);
+  --sidebar: var(--color-neutral-lighter);
+  --sidebar-foreground: var(--color-neutral-darkest);
+  --sidebar-primary: var(--color-malibu);
+  --sidebar-primary-foreground: var(--color-malibu-darkest);
+  --sidebar-accent: var(--color-malibu-lightest);
+  --sidebar-accent-foreground: var(--color-malibu-darkest);
+  --sidebar-border: var(--color-neutral);
+  --sidebar-ring: var(--color-malibu-darker);
+  --accent-figure: var(--color-spring-green-darker);
+  --glass-tint: color-mix(in oklab, var(--color-neutral-lightest) 62%, transparent);
+  --glass-edge: color-mix(in oklab, var(--color-neutral-lightest) 60%, transparent);
+}
+
+@theme inline {
+  --radius-sm-token: calc(var(--radius) - 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-accent-figure: var(--accent-figure);
+}
+
+@custom-variant data-scrolled (&[data-scrolled]);
+@custom-variant data-horizontal (&:where([data-orientation="horizontal"]));
+@custom-variant data-vertical (&:where([data-orientation="vertical"]));
+@custom-variant data-popup-open (&[data-popup-open]);
+@custom-variant data-open (&[data-open]);
+@custom-variant data-closed (&[data-closed]);
+@custom-variant data-base-ui-inert (&[inert]);
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Custom utilities ------------------------------------------------------- */
+
+/* Frosted panel used for nav pills, stat cards and overlays. */
+@utility glass {
+  background-color: var(--glass-tint);
+  backdrop-filter: blur(22px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  border: 1px solid var(--glass-edge);
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-neutral-darkest) 6%, transparent),
+    0 8px 24px -12px color-mix(in oklab, var(--color-neutral-darkest) 18%, transparent);
+}
+
+/* Dark section background with two slowly drifting brand blooms. */
+@utility ink-bloom {
+  background-color: var(--color-neutral-darkest);
+  background-image:
+    radial-gradient(
+      ellipse 70% 55% at 15% 0%,
+      color-mix(in oklab, var(--color-malibu) 14%, transparent),
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 85% 100%,
+      color-mix(in oklab, var(--color-spring-green) 10%, transparent),
+      transparent 70%
+    );
+  background-repeat: no-repeat;
+  animation: ink-drift 34s ease-in-out infinite alternate;
+}
+
+/* Soft angled beam, positioned with inline --ray-* custom properties. */
+@utility light-ray {
+  position: absolute;
+  top: -12%;
+  height: 100%;
+  transform-origin: top;
+  transform: translateX(-50%) rotate(var(--ray-rotate, 0deg));
+  border-radius: 9999px;
+  filter: blur(40px);
+  opacity: 0.5;
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--ray-color, var(--color-malibu)) 70%, transparent),
+    transparent 78%
+  );
+  animation: ray-drift var(--ray-duration, 22s) var(--ray-delay, 0s) ease-in-out infinite;
+}
+
+/* Scroll-driven lift, degrades to no animation where unsupported. */
+@utility reveal {
+  animation: reveal-in linear both;
+  animation-timeline: view();
+  animation-range: entry 5% cover 30%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-plate,
+  .ink-bloom,
+  .light-ray,
+  .reveal,
+  .ring-spin,
+  .animate-marquee,
+  .animate-marquee-vertical {
+    animation: none !important;
+  }
+}
+
+/* Scroll-driven rotation for the footer's circular wordmark. */
+@utility ring-spin {
+  animation: ring-spin linear both;
+  animation-timeline: view();
+  animation-range: entry 1% exit 99%;
+}
+
+/* Soft painterly wash behind page heroes. Pair with a collage-* palette. */
+@utility hero-plate {
+  --collage-shift: 0px;
+  background-image:
+    radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--collage-b) 22%, transparent) 20%,
+      transparent 21%
+    ),
+    radial-gradient(
+      ellipse 30% 40% at 12% calc(56% - var(--collage-shift) * 1.6),
+      color-mix(in oklab, var(--collage-b) 38%, transparent) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 78% 62% at 46% calc(112% + var(--collage-shift)),
+      color-mix(in oklab, var(--collage-a) 62%, transparent) 0 30%,
+      transparent 61%
+    ),
+    radial-gradient(
+      ellipse 58% 54% at 62% calc(-18% - var(--collage-shift) * 0.6),
+      color-mix(in oklab, var(--collage-b) 55%, transparent) 0 34%,
+      transparent 63%
+    );
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 8px 8px, 100% 100%, 100% 100%, 100% 100%;
+  mask-image: linear-gradient(#000 46%, transparent 92%);
+  -webkit-mask-image: linear-gradient(#000 46%, transparent 92%);
+  animation: plate-drift 28s ease-in-out infinite;
+}
+
+@utility collage-cyan {
+  --collage-a: var(--color-malibu-lighter);
+  --collage-b: var(--color-malibu-light);
+}
+
+@utility collage-mint {
+  --collage-a: var(--color-spring-green-lightest);
+  --collage-b: var(--color-spring-green-lighter);
+}
+
+@utility collage-warm {
+  --collage-a: var(--color-malibu-lightest);
+  --collage-b: var(--color-malibu-lighter);
+}
