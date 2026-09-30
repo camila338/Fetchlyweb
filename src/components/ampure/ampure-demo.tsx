@@ -28,10 +28,14 @@ import "./ampure-demo.css";
 
 const SCREEN_W = 412;
 
-/** Camera stops, in phone pixels from the top of the screen. */
+/** Camera stops, in phone pixels from the top of the screen.
+ *  The card only shows the top ~82% of this 420px window (see .amp in the
+ *  stylesheet) — these are pushed down from their "whole window" values so
+ *  the row/button being tapped lands inside that visible slice instead of
+ *  in the cropped-off strip at the bottom. */
 const CAM_HERO = 0;
-const CAM_ACTION = 204;
-const CAM_SHEET = 467;
+const CAM_ACTION = 280;
+const CAM_SHEET = 543;
 
 type Stage = "offer" | "installing";
 
