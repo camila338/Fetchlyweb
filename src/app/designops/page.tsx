@@ -12,6 +12,7 @@ import Image from "next/image";
 import { InkSection } from "@/components/ink-section";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { FaqSection } from "@/components/sections/faq-section";
+import { HeroDesignCard } from "@/components/sections/hero-design-card";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { QuoteCarousel } from "@/components/sections/quote-carousel";
 import { SplitHero } from "@/components/sections/split-hero";
@@ -57,6 +58,7 @@ export default function DesignOpsPage() {
         rayColor="spring-green-light"
         logos={HERO_LOGOS.product}
         {...DESIGNOPS_HERO}
+        visual={<HeroDesignCard />}
       />
 
       <InkSection>

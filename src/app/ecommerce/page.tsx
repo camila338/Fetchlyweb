@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { InkSection } from "@/components/ink-section";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { FaqSection } from "@/components/sections/faq-section";
+import { HeroCommerceCard } from "@/components/sections/hero-commerce-card";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { Reasons } from "@/components/sections/reasons";
 import { SplitHero } from "@/components/sections/split-hero";
@@ -33,6 +34,7 @@ export default function EcommercePage() {
         rayColor="spring-green-light"
         logos={HERO_LOGOS.ecommerce}
         {...ECOMMERCE_HERO}
+        visual={<HeroCommerceCard />}
       />
 
       <div className="reveal">

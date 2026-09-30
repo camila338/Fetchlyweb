@@ -38,6 +38,7 @@ export function SplitHero({
   lead,
   links,
   tiles,
+  visual,
   logos,
 }: {
   collage?: Collage;
@@ -46,7 +47,9 @@ export function SplitHero({
   lines: readonly string[];
   lead: string;
   links: readonly HeroLink[];
-  tiles: readonly HeroTile[];
+  tiles?: readonly HeroTile[];
+  /** Custom right-hand visual; replaces the image tiles when provided. */
+  visual?: React.ReactNode;
   logos: readonly { name: string; src: string; width?: number }[];
 }) {
   return (
@@ -55,7 +58,7 @@ export function SplitHero({
 
       <Section
         spacing="sm"
-        className="relative z-0 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14"
+        className="relative z-0 grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14"
       >
         <HeroContent className="flex flex-col items-start gap-5 text-left md:gap-6">
           <p className="inline-flex items-center gap-3 rounded-full border border-border bg-background py-1.5 pr-4 pl-1.5 text-body-sm shadow-sm">
@@ -81,7 +84,7 @@ export function SplitHero({
             as="h1"
             italicFirst
             lines={lines}
-            className="text-display-1 text-balance text-foreground"
+            className="text-h1 text-balance text-foreground"
           />
 
           <p className="max-w-site-sm text-body-lg text-pretty text-muted-foreground">
@@ -107,31 +110,35 @@ export function SplitHero({
           </div>
         </HeroContent>
 
-        <div className="grid w-full grid-cols-2 gap-3 lg:gap-4">
-          {tiles.map((tile) => (
-            <div
-              key={tile.src}
-              className={
-                tile.tall
-                  ? "glass col-span-1 row-span-2 overflow-hidden rounded-2xl p-2"
-                  : "glass overflow-hidden rounded-2xl p-2"
-              }
-            >
-              <Image
-                src={tile.src}
-                alt={tile.alt}
-                width={tile.width}
-                height={tile.height}
-                sizes="(min-width: 1024px) 25vw, 50vw"
+        {visual ? (
+          visual
+        ) : (
+          <div className="grid w-full grid-cols-2 gap-3 lg:gap-4">
+            {tiles?.map((tile) => (
+              <div
+                key={tile.src}
                 className={
                   tile.tall
-                    ? "h-full w-full rounded-xl object-cover"
-                    : "aspect-[4/3] w-full rounded-xl object-cover"
+                    ? "glass col-span-1 row-span-2 overflow-hidden rounded-2xl p-2"
+                    : "glass overflow-hidden rounded-2xl p-2"
                 }
-              />
-            </div>
-          ))}
-        </div>
+              >
+                <Image
+                  src={tile.src}
+                  alt={tile.alt}
+                  width={tile.width}
+                  height={tile.height}
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  className={
+                    tile.tall
+                      ? "h-full w-full rounded-xl object-cover"
+                      : "aspect-[4/3] w-full rounded-xl object-cover"
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </Section>
 
       <div className="overflow-hidden">

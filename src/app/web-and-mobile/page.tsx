@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { InkSection } from "@/components/ink-section";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { FaqSection } from "@/components/sections/faq-section";
+import { HeroServiceCards } from "@/components/sections/hero-service-cards";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { Reasons } from "@/components/sections/reasons";
 import { SplitHero } from "@/components/sections/split-hero";
@@ -26,7 +27,11 @@ export const metadata: Metadata = {
 export default function WebAndMobilePage() {
   return (
     <main id="main" tabIndex={-1} className="outline-none">
-      <SplitHero logos={HERO_LOGOS.product} {...WEB_MOBILE_HERO} />
+      <SplitHero
+        logos={HERO_LOGOS.product}
+        {...WEB_MOBILE_HERO}
+        visual={<HeroServiceCards />}
+      />
 
       <div className="reveal">
         <LogoMarquee title="The stacks we build on" logos={WEB_MOBILE_STACK} />
