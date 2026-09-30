@@ -210,13 +210,13 @@ export function AmpureDemo({
       const width = root.clientWidth;
       const height = root.clientHeight;
       if (!width || !height) return;
-      // Fill the card's full width rather than shrinking to fit its height too
-      // — the device is nearly square and the card is landscape, so fitting
-      // both axes left the phone a narrow, illegible sliver. Filling the
-      // width instead makes the frame the dominant element; anchoring it to
-      // the top with a fixed gap (see .amp in the stylesheet) crops any extra
-      // height off the bottom instead of touching the card's top edge.
-      const scale = width / SCREEN_W;
+      // Fitting both axes (the old `Math.min` here) left the phone a narrow,
+      // illegible sliver, since the device is nearly square and the card is
+      // landscape. Filling the width outright fixed that but over-corrected:
+      // on a wide desktop card it reads as too zoomed in, with too much
+      // height cropped off. 0.8x of a full width-fill splits the difference
+      // — legible and dominant, without feeling cropped in tight.
+      const scale = (width / SCREEN_W) * 0.8;
       root.style.setProperty("--amp-s", String(scale));
     };
 
