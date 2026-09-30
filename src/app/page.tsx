@@ -2,6 +2,7 @@ import { ArrowUpRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { AmpureDemo } from "@/components/ampure/ampure-demo";
 import { InkSection } from "@/components/ink-section";
 import { Bento } from "@/components/sections/bento";
 import { ClosingCta } from "@/components/sections/closing-cta";
@@ -22,6 +23,8 @@ import { Stagger, StaggerItem } from "@/components/ui/stagger";
 import { CASE_STUDIES } from "@/content/case-studies";
 import { HOME_FAQS } from "@/content/faqs";
 import { TECH_STACK, TRUSTED_LOGOS } from "@/content/stack";
+
+const AMPURE_SLUG = "ampure-design-ops";
 
 const STATS = [
   { value: "300,000+", label: "Oats Overnight active subscribers" },
@@ -63,8 +66,8 @@ export default function HomePage() {
         <FadeIn delay={0.55} className="max-w-site-sm">
           <p className="text-body-lg text-pretty text-muted-foreground">
             A full product team — engineering, design, QA and project management
-            — on one flat monthly plan. No scope of work, no hiring cycle, and it
-            flexes as your roadmap does.
+            — on one flat monthly plan. No scope of work, no hiring cycle, and
+            it flexes as your roadmap does.
           </p>
         </FadeIn>
 
@@ -103,8 +106,13 @@ export default function HomePage() {
               <StaggerItem as="li" key={study.slug}>
                 <Link
                   href={`/work/${study.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-colors hover:border-foreground"
+                  className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-foreground"
                 >
+                  {study.slug === AMPURE_SLUG ? (
+                    <div className="relative aspect-[3/2] w-full overflow-hidden">
+                      <AmpureDemo />
+                    </div>
+                  ) : (
                     <Image
                       src={study.thumb.src}
                       alt=""
@@ -114,21 +122,22 @@ export default function HomePage() {
                       sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                       className="aspect-[3/2] w-full object-cover"
                     />
-                    <div className="flex flex-1 flex-col gap-3 p-6">
-                      <p className="font-display text-h5 text-(--accent-figure)">
-                        {study.headline}
-                      </p>
-                      <h3 className="flex items-center gap-1.5 text-body-md font-semibold text-foreground">
-                        {study.client}
-                        <ArrowUpRightIcon
-                          aria-hidden
-                          className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                      </h3>
-                      <p className="text-body-sm text-pretty text-muted-foreground">
-                        {study.summary}
-                      </p>
-                    </div>
+                  )}
+                  <div className="flex flex-1 flex-col gap-3 p-6">
+                    <p className="font-display text-h5 text-(--accent-figure)">
+                      {study.headline}
+                    </p>
+                    <h3 className="flex items-center gap-1.5 text-body-md font-semibold text-foreground">
+                      {study.client}
+                      <ArrowUpRightIcon
+                        aria-hidden
+                        className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+                    </h3>
+                    <p className="text-body-sm text-pretty text-muted-foreground">
+                      {study.summary}
+                    </p>
+                  </div>
                 </Link>
               </StaggerItem>
             ))}

@@ -118,6 +118,7 @@ export function PlanCard({
         className={cn(
           buttonVariants({ variant: featured ? "secondary" : "primary" }),
           "mt-auto w-full",
+          featured && "btn-fx btn-invite",
         )}
       >
         {cta}

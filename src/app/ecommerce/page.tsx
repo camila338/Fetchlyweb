@@ -46,6 +46,7 @@ export default function EcommercePage() {
 
       <InkSection>
         <StatBand
+          fill
           lines={["Stores we grew, and by how much"]}
           intro="Both figures are ours, not category averages."
           stats={ECOMMERCE_STATS}

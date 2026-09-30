@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import { AmpureDemo } from "@/components/ampure/ampure-demo";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { Hero } from "@/components/sections/hero";
 import { buttonVariants } from "@/components/ui/button";
@@ -9,6 +10,8 @@ import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 import { Stagger, StaggerItem } from "@/components/ui/stagger";
 import { CASE_STUDIES, formatDate } from "@/content/case-studies";
+
+const AMPURE_SLUG = "ampure-design-ops";
 
 export const metadata: Metadata = {
   title: { absolute: "Case Studies | Real Growth for Brands You Know" },
@@ -43,21 +46,27 @@ export default function WorkPage() {
             <StaggerItem as="li" key={study.slug}>
               <Link
                 href={`/work/${study.slug}`}
-                className="group flex h-full flex-col gap-4 rounded-3xl border border-border bg-card p-4 transition-colors hover:border-foreground"
+                className="group flex h-full flex-col gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-foreground"
               >
+                {study.slug === AMPURE_SLUG ? (
+                  <div className="relative aspect-[3/2] w-full overflow-hidden rounded-md">
+                    <AmpureDemo />
+                  </div>
+                ) : (
                   <Image
                     src={study.cover.src}
                     alt=""
                     width={study.cover.width}
                     height={study.cover.height}
-                    className="aspect-[3/2] w-full rounded-2xl object-cover"
+                    className="aspect-[3/2] w-full rounded-md object-cover"
                   />
-                  <h2 className="font-display text-h5 text-balance text-foreground">
-                    {study.title}
-                  </h2>
-                  <p className="text-body-sm text-pretty text-muted-foreground">
-                    {study.excerpt}
-                  </p>
+                )}
+                <h2 className="font-display text-h5 text-balance text-foreground">
+                  {study.title}
+                </h2>
+                <p className="text-body-sm text-pretty text-muted-foreground">
+                  {study.excerpt}
+                </p>
                 <p className="mt-auto text-body-xs text-muted-foreground">
                   Fetchly ·{" "}
                   <time dateTime={study.date}>{formatDate(study.date)}</time>

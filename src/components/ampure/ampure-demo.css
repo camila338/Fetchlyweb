@@ -1,0 +1,887 @@
+/* Ampure BMID — firmware-update demo.
+   A pixel replica of the product's Overview screen (412x887) and its firmware
+   drawer, drawn at device scale and shrunk to fit whatever box it is dropped
+   into. Every rule is scoped under .amp so nothing here reaches the site. */
+
+.amp {
+  --amp-s: 0.2;
+  --amp-view: 420;
+  --amp-cam: 0;
+
+  --amp-card: #f6fcff;
+  --amp-bg: #e5f7fa;
+  --amp-fg: #020617;
+  --amp-primary: #0c4884;
+  --amp-primary-fg: #f6fcff;
+  --amp-secondary: #cef8fd;
+  --amp-secondary-fg: #0f172a;
+  --amp-accent: #4ccbfc;
+  --amp-muted-fg: #64748b;
+  --amp-line: #00e5ff;
+  --amp-border: #e2e8f0;
+  --amp-input: #cbd5e1;
+  --amp-destructive: #ef4444;
+  --amp-destructive-fg: #f8fafc;
+  --amp-success: #16a34a;
+  --amp-warning: #fbbf24;
+
+  --amp-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 4%;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(
+    130% 100% at 50% 0%,
+    #f2fcff 0%,
+    #dcf4fb 52%,
+    #b9e6f3 100%
+  );
+  font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Faint Ampure line-art behind the screen, mirroring the app's own hero art. */
+.amp-backdrop {
+  position: absolute;
+  inset: -20% -10%;
+  background-image: url("/images/ampure/hero-lines.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 190% auto;
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+/* The card only has room for a slice of the 412x887 screen, so the screen is
+   cropped to a strip and a camera pans it to whatever the flow is doing. */
+.amp-frame {
+  position: relative;
+  width: calc(412px * var(--amp-s));
+  height: calc(var(--amp-view) * var(--amp-s) * 1px);
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgb(2 6 23 / 0.07),
+    0 18px 40px -18px rgb(2 6 23 / 0.45),
+    0 6px 16px -10px rgb(2 6 23 / 0.3);
+}
+
+/* ---------------------------------------------------------------- device -- */
+
+.amp-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 412px;
+  height: 887px;
+  transform: scale(var(--amp-s)) translateY(calc(var(--amp-cam, 0) * -1px));
+  transform-origin: top left;
+  transition: transform 950ms var(--amp-ease);
+  will-change: transform;
+}
+
+.amp-device {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--amp-card);
+  transform: translateY(12%) scale(0.985);
+  opacity: 0;
+  transition:
+    transform 820ms var(--amp-ease),
+    opacity 560ms ease-out;
+  will-change: transform, opacity;
+}
+
+/* While the screen is off, the camera repositions instantly — the snap back to
+   the top of the app must not be visible. */
+.amp[data-entered="false"] .amp-stage {
+  transition: none;
+}
+
+.amp[data-entered="true"] .amp-device {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------ status bar -- */
+
+.amp-statusbar {
+  position: relative;
+  height: 24px;
+  background: var(--amp-card);
+}
+
+.amp-clock {
+  position: absolute;
+  left: 13.73px;
+  top: 4px;
+  font-family: Roboto, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.014px;
+  color: var(--amp-fg);
+}
+
+.amp-sysicons {
+  position: absolute;
+  left: 323.21px;
+  top: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* ------------------------------------------------------------------ hero -- */
+
+.amp-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 32px 16px 24px;
+  overflow: hidden;
+  background-image:
+    linear-gradient(
+      166deg,
+      rgb(76 203 252 / 0.205) 0%,
+      rgb(206 248 253 / 0.3) 56%
+    ),
+    linear-gradient(90deg, #f6fcff 0%, #f6fcff 100%);
+}
+
+.amp-hero-art {
+  position: absolute;
+  left: -338px;
+  top: 42px;
+  width: 767.303px;
+  height: 152.796px;
+  opacity: 0.15;
+  background-image: url("/images/ampure/hero-lines.svg");
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.amp-hero-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.amp-hero-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.amp-sync {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--amp-fg);
+  opacity: 0.7;
+}
+
+.amp-statusrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.amp-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.amp-badge--connected {
+  background: var(--amp-success);
+  color: var(--amp-destructive-fg);
+}
+
+.amp-badge--new {
+  background: var(--amp-destructive);
+  color: var(--amp-destructive-fg);
+}
+
+.amp-badge--installing {
+  background: var(--amp-accent);
+  color: var(--amp-secondary-fg);
+}
+
+.amp-badge--premium {
+  background: var(--amp-accent);
+  color: var(--amp-secondary-fg);
+}
+
+.amp-disconnect {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--amp-fg);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  white-space: nowrap;
+}
+
+.amp-vehicle {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 40px;
+  letter-spacing: -0.9px;
+  color: var(--amp-fg);
+}
+
+.amp-details {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.amp-detail {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.amp-detail span {
+  flex: 1 0 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--amp-fg);
+  opacity: 0.9;
+}
+
+/* ------------------------------------------------------------------ tabs -- */
+
+.amp-tabwrap {
+  position: relative;
+  height: 48px;
+}
+
+.amp-tabs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  padding: 6px 16px;
+  background: var(--amp-secondary);
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
+
+.amp-tab {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  color: var(--amp-fg);
+}
+
+.amp-tab--active {
+  border: 1px solid var(--amp-line);
+  color: var(--amp-primary-fg);
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));
+  background-image:
+    linear-gradient(
+      160.895deg,
+      rgb(255 255 255 / 0.2) 15.888%,
+      rgb(255 255 255 / 0) 75.409%
+    ),
+    linear-gradient(90deg, #0c4884 0%, #0c4884 100%);
+}
+
+.amp-tabbadge {
+  position: absolute;
+  left: 351px;
+  top: 10px;
+}
+
+/* --------------------------------------------------------------- content -- */
+
+.amp-content {
+  position: absolute;
+  left: 16px;
+  top: 268px;
+  width: 380px;
+}
+
+.amp-overview {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 24px 16px;
+  padding: 20px 16px;
+  border: 1px solid var(--amp-border);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg width='380' height='220' viewBox='0 0 380 220' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(0.00000044447 40.52 -69.99 0.00000071684 190 74.082)'><stop stop-color='rgba(0,229,255,0)' offset='0.31373'/><stop stop-color='rgba(5,128,147,0.5)' offset='0.51245'/><stop stop-color='rgba(8,77,92,0.75)' offset='0.61181'/><stop stop-color='rgba(9,51,65,0.875)' offset='0.66149'/><stop stop-color='rgba(10,26,38,1)' offset='0.71117'/></radialGradient></defs><rect x='0' y='0' width='380' height='220' fill='url(%23g)' opacity='0.2'/></svg>"),
+    linear-gradient(90deg, #f6fcff 0%, #f6fcff 100%);
+  background-size: 100% 100%;
+}
+
+.amp-info {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 160px;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.amp-info-text {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.amp-info-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--amp-muted-fg);
+}
+
+.amp-info-value {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.6px;
+  color: var(--amp-fg);
+}
+
+.amp-info-value--warning {
+  color: var(--amp-warning);
+}
+
+.amp-info-value--danger {
+  color: var(--amp-destructive);
+}
+
+/* --------------------------------------------------------- action tiles -- */
+
+.amp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.amp-action-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.amp-action {
+  position: relative;
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 80px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 0;
+  overflow: hidden;
+  border: 1px solid var(--amp-line);
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg width='182' height='80' viewBox='0 0 182 80' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(12.6 7.7 -18.255 6.0865 91 36)'><stop stop-color='rgba(229,247,250,1)' offset='0.51046'/><stop stop-color='rgba(180,195,202,0.8)' offset='0.63284'/><stop stop-color='rgba(130,144,154,0.6)' offset='0.75523'/><stop stop-color='rgba(80,92,107,0.4)' offset='0.87761'/><stop stop-color='rgba(30,41,59,0.2)' offset='1'/></radialGradient></defs><rect x='0' y='0' width='182' height='80' fill='url(%23g)' opacity='0.2'/></svg>"),
+    linear-gradient(90deg, #cef8fd 0%, #cef8fd 100%);
+  background-size: 100% 100%;
+  color: var(--amp-fg);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  transition:
+    transform 180ms var(--amp-ease),
+    filter 180ms ease-out;
+}
+
+.amp-action[data-pressed="true"] {
+  transform: scale(0.965);
+  filter: brightness(0.94);
+  transition-duration: 110ms;
+}
+
+.amp-dot {
+  position: absolute;
+  left: 336px;
+  top: 36px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--amp-destructive);
+}
+
+/* Android-style touch ripple, drawn from the point of the simulated tap. */
+.amp-ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 180px;
+  height: 180px;
+  margin: -90px 0 0 -90px;
+  border-radius: 9999px;
+  background: rgb(12 72 132 / 0.22);
+  pointer-events: none;
+  transform: scale(0.15);
+  opacity: 0;
+}
+
+.amp-ripple--light {
+  background: rgb(255 255 255 / 0.3);
+}
+
+.amp-ripple[data-on="true"] {
+  animation: amp-ripple 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes amp-ripple {
+  0% {
+    transform: scale(0.15);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------- ad card -- */
+
+.amp-adwrap {
+  margin-top: 68px;
+}
+
+.amp-ad {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid var(--amp-border);
+  background: #fff;
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.amp-ad-image {
+  position: absolute;
+  right: -209px;
+  top: -8px;
+  width: 596px;
+  height: 253px;
+  pointer-events: none;
+}
+
+.amp-ad-image img {
+  position: absolute;
+  left: 29.19%;
+  top: 0;
+  width: 70.77%;
+  height: 100%;
+  opacity: 0.5;
+  object-fit: cover;
+}
+
+.amp-ad-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #004b81;
+  mix-blend-mode: color;
+}
+
+.amp-ad-body {
+  position: relative;
+  display: flex;
+  width: 191px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.amp-ad-title {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.6px;
+  color: var(--amp-primary);
+}
+
+.amp-ad-copy {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--amp-muted-fg);
+}
+
+.amp-ad-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--amp-fg);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ navigation -- */
+
+.amp-nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 48px;
+  display: flex;
+  height: 52px;
+  align-items: stretch;
+  gap: 4px;
+  border-top: 1px solid var(--amp-line);
+  background: var(--amp-secondary);
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
+
+.amp-nav-item {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+}
+
+.amp-nav-item--active {
+  background-image:
+    linear-gradient(
+      165.652deg,
+      rgb(255 255 255 / 0.2) 15.888%,
+      rgb(255 255 255 / 0) 75.409%
+    ),
+    linear-gradient(90deg, #0c4884 0%, #0c4884 100%);
+}
+
+.amp-nav-item--active img {
+  filter: drop-shadow(0 8px 5px rgb(0 0 0 / 0.1));
+}
+
+.amp-sysnav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48px;
+  background: var(--amp-card);
+}
+
+.amp-sysnav > * {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.amp-sysnav-back {
+  left: calc(50% - 101px);
+}
+
+.amp-sysnav-home {
+  left: 50%;
+}
+
+.amp-sysnav-recents {
+  left: calc(50% + 100px);
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--amp-muted-fg);
+}
+
+/* ---------------------------------------------------------------- drawer -- */
+
+.amp-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.5);
+  opacity: 0;
+  transition: opacity 420ms ease-out;
+  pointer-events: none;
+}
+
+.amp[data-sheet="true"] .amp-scrim {
+  opacity: 1;
+}
+
+.amp-drawer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+  background: var(--amp-card);
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))
+    drop-shadow(0 10px 7.5px rgb(0 0 0 / 0.1));
+  transform: translateY(100%);
+  transition: transform 520ms var(--amp-ease);
+  will-change: transform;
+}
+
+.amp[data-sheet="true"] .amp-drawer {
+  transform: translateY(0);
+}
+
+.amp-handle-wrap {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.amp-handle {
+  width: 100px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgb(30 41 59 / 0.2);
+}
+
+.amp-drawer-header {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 16px 16px;
+}
+
+.amp-drawer-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.45px;
+  color: var(--amp-fg);
+}
+
+.amp-drawer-sub {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--amp-muted-fg);
+}
+
+.amp-drawer-content {
+  width: 100%;
+  padding: 16px;
+}
+
+.amp-release {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--amp-input);
+  background: var(--amp-bg);
+  transition:
+    background-color 320ms ease-out,
+    border-color 320ms ease-out;
+}
+
+.amp[data-stage="installing"] .amp-release {
+  border-color: var(--amp-border);
+  background: transparent;
+}
+
+.amp-release > * {
+  animation: amp-fade 340ms var(--amp-ease) both;
+}
+
+@keyframes amp-fade {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+.amp-release-text {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.amp-release-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.45px;
+  color: var(--amp-fg);
+}
+
+.amp-release-copy {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--amp-muted-fg);
+}
+
+.amp-progress {
+  display: block;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  background: var(--amp-secondary);
+}
+
+.amp-progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--amp-primary);
+  transition: width 640ms cubic-bezier(0.37, 0.16, 0.2, 1);
+}
+
+.amp-drawer-footer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+
+.amp-btn {
+  position: relative;
+  display: flex;
+  min-width: 80px;
+  width: 100%;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 12px;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: nowrap;
+  transition:
+    transform 180ms var(--amp-ease),
+    filter 180ms ease-out,
+    opacity 320ms ease-out;
+}
+
+.amp-btn-wrap {
+  padding: 0 4px;
+}
+
+.amp-btn--primary {
+  color: var(--amp-primary-fg);
+  background-image:
+    linear-gradient(
+      174.73deg,
+      rgb(255 255 255 / 0.2) 15.888%,
+      rgb(255 255 255 / 0) 75.409%
+    ),
+    linear-gradient(90deg, #0c4884 0%, #0c4884 100%);
+}
+
+.amp-btn--primary[data-busy="true"] {
+  opacity: 0.5;
+  background-image: linear-gradient(90deg, #0c4884 0%, #0c4884 100%);
+}
+
+.amp-btn--primary[data-pressed="true"] {
+  transform: scale(0.98);
+  filter: brightness(0.86);
+  transition-duration: 110ms;
+}
+
+.amp-btn--ghost {
+  border: 1px solid var(--amp-border);
+  background: var(--amp-bg);
+  color: var(--amp-primary);
+}
+
+.amp-spinner {
+  animation: amp-spin 900ms linear infinite;
+}
+
+@keyframes amp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amp-device,
+  .amp-stage,
+  .amp-drawer,
+  .amp-scrim,
+  .amp-progress-fill,
+  .amp-action,
+  .amp-btn {
+    transition: none;
+  }
+
+  .amp-spinner,
+  .amp-ripple--light {
+    background: rgb(255 255 255 / 0.3);
+  }
+
+  .amp-ripple[data-on="true"] {
+    animation: none;
+  }
+}

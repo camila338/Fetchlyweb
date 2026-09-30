@@ -20,7 +20,8 @@ const item: Variants = {
 
 /**
  * Container that reveals its <StaggerItem> children one after another when it
- * scrolls into view. Pair the two. Static under reduced motion.
+ * scrolls into view, and replays the stagger every time it re-enters. Pair
+ * the two. Static under reduced motion.
  */
 export function Stagger({
   as = "div",
@@ -48,7 +49,7 @@ export function Stagger({
       variants={container}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount }}
+      viewport={{ once: false, amount }}
     >
       {children}
     </Comp>

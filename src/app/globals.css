@@ -460,3 +460,84 @@
   --collage-a: var(--color-malibu-lightest);
   --collage-b: var(--color-malibu-lighter);
 }
+
+/* Blue button interaction: grow + glow on hover, ripple on press.
+   The ripple <span> is injected by ButtonRippleController. */
+@utility btn-fx {
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transition:
+    transform 700ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 700ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 300ms ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 16px 0 color-mix(in srgb, var(--color-malibu) 40%, transparent),
+      0 6px 20px -8px color-mix(in srgb, var(--color-malibu) 45%, transparent);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    transition-duration: 150ms;
+  }
+}
+
+.btn-ripple {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: rgb(255 255 255 / 0.55);
+  transform: scale(0);
+  animation: btn-ripple 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes btn-ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-fx:hover,
+  .btn-fx:active {
+    transform: none;
+  }
+  .btn-ripple {
+    display: none;
+  }
+}
+
+/* Gentle, looping "click me" breathing halo for a featured CTA. */
+@utility btn-invite {
+  animation: btn-invite 3s ease-in-out infinite;
+
+  &:hover {
+    animation: none;
+  }
+}
+
+@keyframes btn-invite {
+  0%,
+  100% {
+    scale: 1;
+    box-shadow:
+      0 0 0 0 rgb(105 229 251 / 0),
+      0 0 0 0 rgb(105 229 251 / 0);
+  }
+  50% {
+    scale: 1.02;
+    box-shadow:
+      0 0 0 7px rgb(105 229 251 / 0.16),
+      0 0 26px 2px rgb(105 229 251 / 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-invite {
+    animation: none;
+  }
+}

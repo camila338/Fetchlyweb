@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import localFont from "next/font/local";
 
+import { ButtonRippleController } from "@/components/button-ripple-controller";
 import { RevealController } from "@/components/reveal-controller";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -69,6 +70,7 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <RevealController />
+        <ButtonRippleController />
       </body>
     </html>
   );

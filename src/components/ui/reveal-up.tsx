@@ -6,7 +6,8 @@ import * as React from "react";
 /**
  * Slides a block into place from a given offset with a fade as it scrolls into
  * view (Aeline-style entrance). Defaults to rising from below; pass `x` for a
- * side entrance. Plays once. Renders a plain block under reduced motion.
+ * side entrance. Replays every time it re-enters the viewport. Renders a
+ * plain block under reduced motion.
  */
 export function RevealUp({
   children,
@@ -34,7 +35,7 @@ export function RevealUp({
       className={className}
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount }}
+      viewport={{ once: false, amount }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}

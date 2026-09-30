@@ -63,6 +63,7 @@ export default function DesignOpsPage() {
 
       <InkSection>
         <StatBand
+          fill
           lines={["100+ projects shipped.", "10+ years in the field."]}
           intro="A senior product designer integrated into your team, supported by Fetchly's engineering, data and project management when the work calls for it."
           stats={DESIGNOPS_STATS}

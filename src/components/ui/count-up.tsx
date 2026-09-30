@@ -6,7 +6,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Counts a numeric figure up from zero to its value the first time it scrolls
+ * Counts a numeric figure up from zero to its value every time it scrolls
  * into view. Keeps any prefix/suffix around the number ("+", "%", "k", "300,000+")
  * and preserves its decimals and thousands grouping. Static under reduced motion.
  */
@@ -20,7 +20,7 @@ export function CountUp({
   duration?: number;
 }) {
   const ref = React.useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const inView = useInView(ref, { once: false, amount: 0.6 });
   const reduced = useReducedMotion();
 
   const parts = React.useMemo(

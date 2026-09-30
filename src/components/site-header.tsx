@@ -154,7 +154,7 @@ export function SiteHeader() {
             href="/contact"
             className={cn(
               buttonVariants({ variant: "secondary", size: "md" }),
-              "hidden group-data-scrolled/scroll:bg-primary group-data-scrolled/scroll:text-primary-foreground group-data-scrolled/scroll:hover:bg-primary/80 motion-reduce:transition-none md:inline-flex",
+              "btn-fx hidden group-data-scrolled/scroll:bg-primary group-data-scrolled/scroll:text-primary-foreground group-data-scrolled/scroll:hover:bg-primary/80 motion-reduce:transition-none md:inline-flex",
             )}
           >
             Get in Touch

@@ -5,9 +5,11 @@ import * as React from "react";
 
 /**
  * Drives every `.reveal` block: each one starts hidden (via CSS) and gets
- * `is-revealed` the first time it scrolls into view, so it rises and fades in.
- * Uses IntersectionObserver, so it works in every browser (a CSS scroll
- * timeline does not). Re-scans on route change for the new page's blocks.
+ * `is-revealed` whenever it scrolls into view, then loses it again once it
+ * scrolls back out — so the rise-and-fade replays every time the block
+ * re-enters, not just the first time. Uses IntersectionObserver, so it works
+ * in every browser (a CSS scroll timeline does not). Re-scans on route change
+ * for the new page's blocks.
  */
 export function RevealController() {
   const pathname = usePathname();
@@ -15,7 +17,7 @@ export function RevealController() {
   React.useEffect(() => {
     const els = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".reveal:not(.is-revealed), .reveal-left:not(.is-revealed), .reveal-right:not(.is-revealed)",
+        ".reveal, .reveal-left, .reveal-right",
       ),
     );
     if (els.length === 0) return;
@@ -28,10 +30,7 @@ export function RevealController() {
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            io.unobserve(entry.target);
-          }
+          entry.target.classList.toggle("is-revealed", entry.isIntersecting);
         }
       },
       { rootMargin: "0px 0px -18% 0px", threshold: 0 },

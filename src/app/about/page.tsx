@@ -80,6 +80,7 @@ export default function AboutPage() {
 
       <InkSection>
         <StatBand
+          fill
           lines={["We pick the stack that fits your product"]}
           intro="We don't push a single framework. We pick the right tools for your product, your scale, and your timeline."
           stats={ABOUT_STATS}
