@@ -117,7 +117,7 @@ export function HeroServiceCards() {
       className="relative isolate mx-auto w-full max-w-[40rem] text-left"
     >
       <div className="pointer-events-none absolute -inset-8 -z-10 rounded-[3rem] bg-[radial-gradient(circle_at_45%_35%,var(--color-malibu-light),transparent_75%)] opacity-40 blur-2xl" />
-      <CodeBackdrop className="absolute top-8 -bottom-20 -left-12 -right-6 -z-10" />
+      <CodeBackdrop className="absolute -top-24 -bottom-24 -left-16 -right-4 -z-10" />
 
       {/* Desktop — browser window */}
       <motion.div

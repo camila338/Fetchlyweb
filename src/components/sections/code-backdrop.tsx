@@ -53,8 +53,7 @@ const HOLD_TICKS = 90;
 
 /**
  * Large, low-opacity block of code that types itself out behind a hero
- * visual, then restarts, inside its own rounded glass frame (the typing never
- * spills past its edges). Purely decorative; static under reduced motion.
+ * visual, then restarts. Purely decorative; static under reduced motion.
  */
 export function CodeBackdrop({ className }: { className?: string }) {
   const reduced = useReducedMotion();
@@ -87,7 +86,7 @@ export function CodeBackdrop({ className }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none overflow-hidden rounded-[2rem] border border-black/10 bg-neutral-lightest shadow-[0_30px_60px_-35px_rgba(5,11,13,0.4)] ring-1 ring-black/5 ${className ?? ""}`}
+      className={`pointer-events-none overflow-hidden [mask-image:radial-gradient(ellipse_at_center,black_65%,transparent_100%)] ${className ?? ""}`}
     >
       <pre className="m-0 p-6 font-mono text-[1.15rem] leading-8 whitespace-pre text-malibu-darkest/45 select-none">
         {spans}
